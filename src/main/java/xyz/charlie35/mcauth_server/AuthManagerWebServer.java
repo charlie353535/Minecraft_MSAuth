@@ -25,7 +25,7 @@ public class AuthManagerWebServer {
     public static String REDIRECT_URI = "";
 
     public static final int TOKEN_STORE_TIME_MS = 30 * 1000;
-    public static final int TIME_BETWEEN_REQS = 500;
+    public static final int TIME_BETWEEN_REQS = 4000;
 
     public static void main(String[] args) throws IOException {
         log("Starting MCAUTH webserver -- Copyright charlie353535");
