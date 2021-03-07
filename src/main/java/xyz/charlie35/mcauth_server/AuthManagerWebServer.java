@@ -52,11 +52,17 @@ public class AuthManagerWebServer {
     public static boolean handleRatelimit(String client) {
         lastRequestTime.putIfAbsent(client, 0L);
         if (System.currentTimeMillis()-lastRequestTime.get(client) <= TIME_BETWEEN_REQS) {
-            lastRequestTime.put(client, System.currentTimeMillis());
+            //lastRequestTime.put(client, System.currentTimeMillis());
             return true;
         }
         lastRequestTime.put(client, System.currentTimeMillis());
         return false;
+    }
+
+    public static long timeToNoRateLimit(String client) {
+        if (!lastRequestTime.containsKey(client))
+            return 0;
+        return 4000L-(System.currentTimeMillis()-lastRequestTime.get(client));
     }
 
     static class AuthInfo {

@@ -25,8 +25,9 @@ public class CachedTokenHandler implements HttpHandler {
             if (httpExchange.getRequestHeaders().containsKey("X-Forwarded-For"))
                 client = httpExchange.getRequestHeaders().getFirst("X-Forwarded-For").split(",")[0];
 
+            int ttnr = (int) AuthManagerWebServer.timeToNoRateLimit(client);
             if (AuthManagerWebServer.handleRatelimit(client)) {
-                String httpResponse = "429 Ratelimited";
+                String httpResponse = "429 Ratelimited -- come back in "+ttnr+"ms";
                 httpExchange.sendResponseHeaders(429, httpResponse.length());
                 httpExchange.getResponseBody().write(httpResponse.getBytes(StandardCharsets.US_ASCII));
                 return;
