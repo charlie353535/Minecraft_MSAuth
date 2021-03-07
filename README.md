@@ -10,6 +10,9 @@ Run like so: <code>java -jar mcauth_ms.jar [client ID] [client secret] [redirect
 Clients can authenticate like so:<br>
 <code>https://login.live.com/oauth20_authorize.srf?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=YOUR_REDIRECT_URI&scope=XboxLive.signin%20offline_access&state=STORAGE_ID</code>
 <br>
+You can reauthenticate using your refresh token with *no* user interaction like this:<br>
+<code>https://mc.charlie35.xyz/auth?code=REFRESH_TOKEN&state=STORAGE_ID&reauth=true</code>
+<br>
 You can retrieve client log-in info either by the response to the above page, or by GET'ing (these last 30s, and can be queried only once):<br>
 <code>/get?uid=STORAGE_ID</code>
 <br>
