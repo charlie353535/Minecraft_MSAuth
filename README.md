@@ -5,7 +5,7 @@
 <br>
 Create an Azure app of the type "web", set your redirect URI and a client secret.
 <br>
-Run like so: <code>java -jar mcauth_ms.jar \<client ID\> \<client secret\> \<redirect URI\><code>
+Run like so: <code>java -jar mcauth_ms.jar \<client ID\> \<client secret\> \<redirect URI\></code>
 <br>
 Clients can authenticate like so:<br>
 <code>https://login.live.com/oauth20_authorize.srf?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=YOUR_REDIRECT_URI&scope=XboxLive.signin%20offline_access&state=STORAGE_ID</code>
