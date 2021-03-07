@@ -1,7 +1,7 @@
 # Minecraft_MSAuth
 ### An authentication server for Microsoft accounts on Minecraft.
 <br>
-#### How to use:<br>
+### How to use:<br>
 Create an Azure app of the type "web", set your redirect URI and a client secret.
 <br>
 Run like so: ```java -jar mcauth_ms.jar <client ID> <client secret> <redirect URI>```
