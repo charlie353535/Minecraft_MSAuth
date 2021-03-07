@@ -19,4 +19,5 @@ I have a public instance on: <br><code>https://login.live.com/oauth20_authorize.
 <br><br>
 You should know what you are doing when you use this. Don't bombard me with inane, basic questions regarding this software.
 
-tesco says hi :)
+
+tesco says hi, i hope you are having a good day :)
