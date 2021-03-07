@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group 'xyz.charlie35'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.json', name: 'json', version: '20201115'
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "xyz.charlie35.mcauth_server.AuthManagerWebServer"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
