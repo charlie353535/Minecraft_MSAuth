@@ -70,15 +70,15 @@ public class OAuthHandler implements HttpHandler {
                 MinecraftTokenRequestor.MinecraftToken minecraftToken = MinecraftTokenRequestor.getFor(xstsToken);
 
                 System.out.println("> Checking ownership and getting profile for "+client);
-                //MinecraftTokenRequestor.checkAccount(minecraftToken);
-                //MinecraftTokenRequestor.MinecraftProfile minecraftProfile = MinecraftTokenRequestor.getProfile(minecraftToken);
+                MinecraftTokenRequestor.checkAccount(minecraftToken);
+                MinecraftTokenRequestor.MinecraftProfile minecraftProfile = MinecraftTokenRequestor.getProfile(minecraftToken);
 
                 JSONObject authResult = new JSONObject();
                 authResult.put("access_token", minecraftToken.accessToken);
                 authResult.put("refresh_token", authToken.refreshToken);
-                //authResult.put("uuid", minecraftProfile.uuid);
-                //authResult.put("name", minecraftProfile.name);
-                //authResult.put("skin", minecraftProfile.skinURL);
+                authResult.put("uuid", minecraftProfile.uuid);
+                authResult.put("name", minecraftProfile.name);
+                authResult.put("skin", minecraftProfile.skinURL);
 
                 String httpResponse = authResult.toString();
 
