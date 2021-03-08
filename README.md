@@ -1,23 +1,23 @@
 # Minecraft_MSAuth
-### An authentication server for Microsoft accounts on Minecraft.
-<br>
+**An authentication server for Microsoft accounts on Minecraft.**
+
 ### How to use:
-<br>
-Create an Azure app of the type "web", set your redirect URI and a client secret.
-<br>
-Run like so: <code>java -jar mcauth_ms.jar [client ID] [client secret] [redirect URI]</code>
-<br>
-Clients can authenticate like so:<br>
-<code>https://login.live.com/oauth20_authorize.srf?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=YOUR_REDIRECT_URI&scope=XboxLive.signin%20offline_access&state=STORAGE_ID</code>
-<br>
-You can reauthenticate using your refresh token with *no* user interaction like this:<br>
-<code>https://mc.charlie35.xyz/auth?code=REFRESH_TOKEN&state=STORAGE_ID&reauth=true</code>
-<br>
-You can retrieve client log-in info either by the response to the above page, or by GET'ing (these last 30s, and can be queried only once):<br>
-<code>/get?uid=STORAGE_ID</code>
-<br>
-Storage ID is *not* required, and will be ignored if it is an invalid UUID.
-<br>
-I have a public instance on: <br><code>https://login.live.com/oauth20_authorize.srf?client_id=cbb2c2b0-3c23-422f-9b5b-329e9ba33c61&response_type=code&redirect_uri=https://mc.charlie35.xyz/auth&scope=XboxLive.signin%20offline_access&state=STORAGE_ID</code>   (<code>mc.charlie35.xyz</code>)
-<br><br>
+
+1. Create an Azure app of the type "web", set your redirect URI and a client secret.
+2. Run like so: `java -jar mcauth_ms.jar [client ID] [client secret] [redirect URI]`
+3. Clients can authenticate like so:  
+    `https://login.live.com/oauth20_authorize.srf?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=YOUR_REDIRECT_URI&scope=XboxLive.signin%20offline_access&state=STORAGE_ID`
+4. You can reauthenticate using your refresh token with *no* user interaction like this:  
+    `https://mc.charlie35.xyz/auth?code=REFRESH_TOKEN&state=STORAGE_ID&reauth=true`
+5. You can retrieve client log-in info either by the response to the above page, or by GET'ing (these last 30s, and can be queried only once):  
+    `/get?uid=STORAGE_ID`
+
+**Note:** Storage ID is *not* required, and will be ignored if it is an invalid UUID.
+
+
+I have a public instance on:
+- `https://login.live.com/oauth20_authorize.srf?client_id=cbb2c2b0-3c23-422f-9b5b-329e9ba33c61&response_type=code&redirect_uri=https://mc.charlie35.xyz/auth&scope=XboxLive.signin%20offline_access&state=STORAGE_ID`
+- (`mc.charlie35.xyz`)
+
+
 You should know what you are doing when you use this. Don't bombard me with inane, basic questions regarding this software.
