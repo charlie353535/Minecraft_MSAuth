@@ -34,6 +34,53 @@ public class MSTokenRequestor {
             URL url = new URL("https://login.live.com/oauth20_token.srf");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection) con;
+            http.setRequestMethod("POST");
+            http.setDoOutput(true);
+
+            http.setFixedLengthStreamingMode(length);
+            http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            http.connect();
+            try (OutputStream os = http.getOutputStream()) {
+                os.write(out);
+            }
+
+            BufferedReader reader;
+            if (http.getResponseCode()!=200) {
+                reader = new BufferedReader(new InputStreamReader(http.getErrorStream()));
+            } else {
+                reader = new BufferedReader(new InputStreamReader(http.getInputStream()));
+            }
+            String lines = reader.lines().collect(Collectors.joining());
+
+            JSONObject json = new JSONObject(lines);
+            if (json.keySet().contains("error")) {
+                throw new AuthenticationException(json.getString("error") + ": " + json.getString("error_description"));
+            }
+            return new TokenPair(json.getString("access_token"), json.getString("refresh_token"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    public static TokenPair getForUserPass(String authCode) throws IOException, AuthenticationException {
+        try {
+            Map<String, String> arguments = new HashMap<>();
+            arguments.put("client_id", "00000000402b5328");
+            arguments.put("code", authCode);
+            arguments.put("grant_type", "authorization_code");
+            arguments.put("redirect_uri", "https://login.live.com/oauth20_desktop.srf");
+            arguments.put("scope","service::user.auth.xboxlive.com::MBI_SSL");
+            StringJoiner sj = new StringJoiner("&");
+            for (Map.Entry<String, String> entry : arguments.entrySet())
+                sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "="
+                        + URLEncoder.encode(entry.getValue(), "UTF-8"));
+            byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
+            int length = out.length;
+
+            URL url = new URL("https://login.live.com/oauth20_token.srf");
+            URLConnection con = url.openConnection();
+            HttpURLConnection http = (HttpURLConnection) con;
             http.setRequestMethod("POST"); // PUT is another valid option
             http.setDoOutput(true);
 
@@ -63,6 +110,7 @@ public class MSTokenRequestor {
             throw e;
         }
     }
+
 
     public static TokenPair refreshFor(String code) throws AuthenticationException, IOException {
         try {

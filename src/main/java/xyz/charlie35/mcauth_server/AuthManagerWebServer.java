@@ -30,8 +30,8 @@ public class AuthManagerWebServer {
     public static void main(String[] args) throws IOException {
         log("Starting MCAUTH webserver -- Copyright charlie353535");
 
-        if (args.length!=3) {
-            System.out.println("Usage: ./thisfile <client ID> <client secret> <redirect URI>");
+        if (args.length!=4) {
+            System.out.println("Usage: ./thisfile <client ID> <client secret> <redirect URI> <port>");
             System.exit(-1);
         }
 
@@ -41,12 +41,13 @@ public class AuthManagerWebServer {
 
         ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(THREADS);
 
-        HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0", 3124), 0);
+        HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0", Integer.parseInt(args[3])), 0);
         server.createContext("/auth", new OAuthHandler());
+        server.createContext("/userpass", new UserPassHandler());
         server.createContext("/get", new CachedTokenHandler());
         server.setExecutor(threadPoolExecutor);
         server.start();
-        log("Server started on port 3124");
+        log("Server started on port "+args[3]+" ["+REDIRECT_URI+"]");
     }
 
     public static boolean handleRatelimit(String client) {
