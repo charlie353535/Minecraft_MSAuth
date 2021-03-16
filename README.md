@@ -20,6 +20,7 @@
 
 I have a public instance on:
 - `https://login.live.com/oauth20_authorize.srf?client_id=cbb2c2b0-3c23-422f-9b5b-329e9ba33c61&response_type=code&redirect_uri=https://mc.charlie35.xyz/auth&scope=XboxLive.signin%20offline_access&state=STORAGE_ID`
+- `https://mc.charlie35.xyz/userpass?user=YOUR_MS_EMAIL&pass=YOUR_MS_PASS`
 - (`mc.charlie35.xyz`)
 
 
